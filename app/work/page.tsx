@@ -37,7 +37,7 @@ export default function WorkPage() {
         <ScrollFadeIn delay={0.05}>
           <section id="experience" className="mb-16">
             <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--muted)] mb-6">
-              company experience
+              Work experience
             </h2>
             <div className="flex flex-col gap-5">
               {experience.map((exp) => (

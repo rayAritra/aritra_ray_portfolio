@@ -43,25 +43,12 @@ export default function Home() {
             {/* Currently at */}
             <p className="text-sm text-[var(--muted)]">
               currently, i&apos;m working at{" "}
-              <a
-                href={personal.currentJob.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--fg)] underline underline-offset-3 hover:opacity-70 transition-opacity inline-flex items-center gap-1"
-              >
-                <span className="relative inline-block w-4 h-4 align-middle rounded-sm overflow-hidden bg-[var(--subtle)]">
-                  <Image
-                    src={personal.currentJob.logo}
-                    alt={personal.currentJob.company}
-                    fill
-                    className="object-contain"
-                    unoptimized
-                  />
-                </span>
-                {personal.currentJob.company}
-              </a>{" "}
-              as a {personal.currentJob.role},{" "}
-              {personal.currentJob.description}
+              <JobLink job={personal.currentJobs[0]} /> as a{" "}
+              {personal.currentJobs[0].role},{" "}
+              {personal.currentJobs[0].description} i&apos;m also a{" "}
+              {personal.currentJobs[1].role} at{" "}
+              <JobLink job={personal.currentJobs[1]} />,{" "}
+              {personal.currentJobs[1].description}
             </p>
 
             {/* Social links */}
@@ -113,8 +100,14 @@ export default function Home() {
         <ScrollFadeIn delay={0.08} className="mt-16">
           <section id="about">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-7 h-7 rounded-full bg-[var(--fg)] text-[var(--bg)] flex items-center justify-center text-[10px] font-semibold tracking-wider flex-shrink-0 select-none">
-                AR
+              <div className="relative w-7 h-7 rounded-full overflow-hidden flex-shrink-0 border border-[var(--border)]">
+                <Image
+                  src={personal.profilePhoto}
+                  alt={personal.displayName}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
               </div>
               <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--muted)]">
                 about
@@ -312,5 +305,31 @@ export default function Home() {
         </footer>
       </div>
     </main>
+  );
+}
+
+function JobLink({
+  job,
+}: {
+  job: { company: string; url: string; logo: string };
+}) {
+  return (
+    <a
+      href={job.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[var(--fg)] underline underline-offset-3 hover:opacity-70 transition-opacity inline-flex items-center gap-1"
+    >
+      <span className="relative inline-block w-4 h-4 align-middle rounded-sm overflow-hidden bg-[var(--subtle)]">
+        <Image
+          src={job.logo}
+          alt={job.company}
+          fill
+          className="object-contain"
+          unoptimized
+        />
+      </span>
+      {job.company}
+    </a>
   );
 }

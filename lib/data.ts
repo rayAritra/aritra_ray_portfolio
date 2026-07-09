@@ -1,29 +1,40 @@
 export const personal = {
-  name: "aritra ray",
+  name: "Aritra Ray",
   displayName: "Aritra Ray",
   title: "full-stack software engineer",
-  bio: "full-stack software engineer, based in west bengal, india. final-year cse student. loves building things and shipping fast.",
-  location: "west bengal, india",
-  email: "aritra@example.com",
+  bio: "Backend-focused Full-Stack Developer based in Kolkata, India. I specialize in robust APIs, database architecture, and systems built to scale. Clean code, fast shipping, zero shortcuts from prototype to production.",
+
+  location: "Kolkata, india",
+  email: "aritra.sohan@gmail.com",
   profilePhoto: "/aritra.jpg",
   initials: "AR",
-  currentJob: {
-    company: "Faunly",
-    role: "software engineer",
-    url: "https://faunly.com",
-    logo: "/logos/faunly.png",
-    description:
-      "building scalable backend systems, apis, and infrastructure powering faunly's products.",
-  },
+  currentJobs: [
+    {
+      company: "Faunly",
+      role: "software engineer",
+      url: "https://faunly.com",
+      logo: "/logos/faunly.png",
+      description:
+        "building scalable backend systems, apis, and infrastructure powering faunly's products.",
+    },
+    {
+      company: "Ezzstar",
+      role: "founding engineer",
+      url: "https://www.ezzstar.space",
+      logo: "/logos/ezzstar.png",
+      description:
+        "shipping core features across ezzstar's web3 social platform for creators and gamers.",
+    },
+  ],
   social: {
     github: "https://github.com/rayAritra",
-    linkedin: "https://linkedin.com/in/aritraray",
-    twitter: "https://twitter.com/Aritraray2005",
+    linkedin: "https://www.linkedin.com/in/aritra-ray-236681293",
+    twitter: "https://x.com/AritraSohan",
     hashnode: "https://aritra05.hashnode.dev",
     resume: "#",
   },
   about:
-    "i started building things in my first year of college, driven by curiosity and a lot of debugging. since then i've shipped a production edtech platform serving 500+ students, built several real-time applications, and most recently moved into backend infrastructure work at an early-stage startup. i'm currently open to new opportunities and always happy to talk about what i'm building.",
+    "I started building things in my first year of college, driven by curiosity and a lot of debugging. Since then, I've worn a few hats: building scalable backend services and APIs at Faunly, shipping core features as a founding engineer at Ezzstar (a Web3 social platform), and building AirEdify, a production EdTech platform. I enjoy working across the full stack, but my focus is on backend systems, database architecture, and API design. I care about clean, reliable backend systems and shipping fast without cutting corners. Currently open to new opportunities  always happy to talk about what I'm building.",
 };
 
 export interface Experience {
