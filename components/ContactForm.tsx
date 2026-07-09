@@ -23,7 +23,7 @@ export default function ContactForm() {
   };
 
   const inputClass =
-    "w-full bg-transparent border-b border-[var(--border)] py-2 text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--fg)] transition-colors text-sm";
+    "w-full bg-transparent border-b border-[var(--border)] py-2 text-[var(--fg)] placeholder:text-[var(--muted)] focus:outline-none focus:border-[var(--fg)] transition-colors text-base";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -71,7 +71,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="text-sm underline underline-offset-4 text-[var(--fg)] hover:text-[var(--muted)] transition-colors"
+        className="text-base underline underline-offset-4 text-[var(--fg)] hover:text-[var(--muted)] transition-colors"
       >
         send message →
       </button>

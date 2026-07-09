@@ -23,7 +23,7 @@ export const personal = {
     resume: "#",
   },
   about:
-    "i started building things in my first year of college, with zero cs background — just curiosity and a lot of debugging. since then i've shipped a production edtech platform serving 500+ students, built real-time apps, and most recently moved into backend infrastructure work at an early-stage startup. i'm currently looking for new opportunities and always happy to talk about what i'm building.",
+    "i started building things in my first year of college, driven by curiosity and a lot of debugging. since then i've shipped a production edtech platform serving 500+ students, built several real-time applications, and most recently moved into backend infrastructure work at an early-stage startup. i'm currently open to new opportunities and always happy to talk about what i'm building.",
 };
 
 export interface Experience {
@@ -31,6 +31,8 @@ export interface Experience {
   type: string;
   company: string;
   companyUrl?: string;
+  companyLogo?: string;
+  websiteLabel?: string;
   location?: string;
   dateRange: string;
   slug: string;
@@ -44,6 +46,8 @@ export const experience: Experience[] = [
     type: "Full-time",
     company: "Faunly",
     companyUrl: "https://faunly.com",
+    companyLogo: "/logos/faunly.png",
+    websiteLabel: "faunly.com",
     dateRange: "Jun 2026 - Present",
     slug: "faunly",
     description:
@@ -54,7 +58,9 @@ export const experience: Experience[] = [
     role: "Full Stack Engineer",
     type: "Full-time",
     company: "Ezzstar",
-    companyUrl: "https://ezzstar.com",
+    companyUrl: "https://www.ezzstar.space",
+    companyLogo: "/logos/ezzstar.png",
+    websiteLabel: "ezzstar.space",
     location: "Oman, Remote",
     dateRange: "May 2026 - Present",
     slug: "ezzstar",
@@ -67,6 +73,8 @@ export const experience: Experience[] = [
     type: "Full-time",
     company: "AirEdify Ventures",
     companyUrl: "https://airedify.in",
+    companyLogo: "/logos/airedify.png",
+    websiteLabel: "airedify.in",
     location: "Remote",
     dateRange: "Dec 2025 - Present",
     slug: "airedify-ventures",
@@ -75,6 +83,11 @@ export const experience: Experience[] = [
     stack: ["Next.js 14", "Strapi CMS", "MongoDB", "Razorpay", "AWS SES"],
   },
 ];
+
+/** Free, no-key website screenshot via WordPress's mshots service. */
+export function getSitePreview(url: string, width = 1200): string {
+  return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=${width}`;
+}
 
 export interface Project {
   title: string;
@@ -89,6 +102,8 @@ export interface Project {
     url: string;
   }[];
   featured?: boolean;
+  /** Force the preview card to use the GitHub repo card instead of a live-site screenshot. */
+  previewSource?: "source";
 }
 
 export const projects: Project[] = [
@@ -106,19 +121,6 @@ export const projects: Project[] = [
       { label: "Live", url: "https://linkedin-gmt-agent.vercel.app" },
       { label: "Source", url: "https://github.com/rayAritra/linkedin-gmt-agent" },
     ],
-    featured: true,
-  },
-  {
-    title: "AirEdify — EdTech Platform",
-    slug: "airedify",
-    date: "Dec 2025",
-    shortDesc:
-      "production edtech platform serving 500+ students. razorpay payments, aws ses email automation, isr caching.",
-    description:
-      "Production platform serving 500+ students. Razorpay payments with webhooks, AWS SES email automation, ISR caching (60% faster loads).",
-    image: "/projects/airedify.png",
-    tags: ["Next.js 14", "Strapi CMS", "MongoDB", "Razorpay", "AWS SES"],
-    links: [{ label: "Website", url: "https://airedify.in" }],
     featured: true,
   },
   {
@@ -145,6 +147,7 @@ export const projects: Project[] = [
     image: "/projects/youth.png",
     tags: ["Node.js", "Groq Vision AI", "React Native", "PostgreSQL"],
     links: [{ label: "Source", url: "https://github.com/rayAritra/youth" }],
+    featured: true,
   },
   {
     title: "ReviewIQ",
@@ -184,43 +187,99 @@ export const projects: Project[] = [
       { label: "Demo", url: "https://chess-game-three-snowy.vercel.app" },
       { label: "Source", url: "https://github.com/rayAritra/chessGame" },
     ],
+    previewSource: "source",
   },
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
 
-export const skills: string[] = [
-  "React",
-  "Next.js 14",
-  "TypeScript",
-  "JavaScript",
-  "Node.js",
-  "Express.js",
-  "Strapi CMS",
-  "MongoDB",
-  "PostgreSQL",
-  "Prisma ORM",
-  "Tailwind CSS",
-  "Shadcn/UI",
-  "Redux",
-  "Vite",
-  "Socket.IO",
-  "WebContainers API",
-  "REST API Design",
-  "AWS SES",
-  "Docker",
-  "Vercel",
-  "JWT",
-  "Auth0",
-  "Razorpay",
-  "Web3 / SPICA token infra",
-  "Git",
-  "Postman",
-  "Java",
-  "Python",
-  "C",
-  "HTML",
-  "CSS",
+/** Best-effort preview image + label for a project's primary link. */
+export function getProjectPreview(project: Project): {
+  image: string;
+  label: string;
+  url: string;
+} {
+  const liveLink = project.links.find((l) => l.label !== "Source");
+  const sourceLink = project.links.find((l) => l.label === "Source");
+
+  const githubPreview = sourceLink
+    ? (() => {
+        const match = sourceLink.url.match(/github\.com\/([^/]+)\/([^/]+)/);
+        return {
+          image: match
+            ? `https://opengraph.githubassets.com/1/${match[1]}/${match[2]}`
+            : project.image,
+          label: getLinkLabel(sourceLink.url),
+          url: sourceLink.url,
+        };
+      })()
+    : null;
+
+  if (project.previewSource === "source" && githubPreview) return githubPreview;
+
+  if (liveLink) {
+    return {
+      image: getSitePreview(liveLink.url),
+      label: getLinkLabel(liveLink.url),
+      url: liveLink.url,
+    };
+  }
+
+  if (githubPreview) return githubPreview;
+
+  return { image: project.image, label: "", url: project.links[0]?.url ?? "" };
+}
+
+/** Turns a URL into a short host/path label, e.g. "github.com/rayAritra/lumio". */
+export function getLinkLabel(url: string): string {
+  try {
+    const u = new URL(url);
+    return `${u.hostname}${u.pathname}`
+      .replace(/^www\./, "")
+      .replace(/\/$/, "");
+  } catch {
+    return url;
+  }
+}
+
+export interface SkillCategory {
+  name: string;
+  skills: string[];
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    name: "languages",
+    skills: ["TypeScript", "JavaScript", "Java", "Python", "C", "HTML", "CSS"],
+  },
+  {
+    name: "frontend",
+    skills: ["React", "Next.js 14", "Redux", "Tailwind CSS", "Shadcn/UI", "Vite"],
+  },
+  {
+    name: "backend & apis",
+    skills: [
+      "Node.js",
+      "Express.js",
+      "REST API Design",
+      "Socket.IO",
+      "WebContainers API",
+      "JWT",
+      "Auth0",
+    ],
+  },
+  {
+    name: "data & cms",
+    skills: ["MongoDB", "PostgreSQL", "Prisma ORM", "Strapi CMS"],
+  },
+  {
+    name: "cloud & tooling",
+    skills: ["AWS SES", "Docker", "Vercel", "Git", "Postman"],
+  },
+  {
+    name: "payments & web3",
+    skills: ["Razorpay", "Web3 / SPICA token infra"],
+  },
 ];
 
 export interface Education {
@@ -266,11 +325,7 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
-export const marqueeImages = [
-  { src: "/projects/linkedin-gtm-agent.png", alt: "LinkedIn GTM Agent" },
-  { src: "/projects/airedify.png", alt: "AirEdify" },
-  { src: "/projects/lumio.png", alt: "Lumio" },
-  { src: "/projects/reviewiq.png", alt: "ReviewIQ" },
-  { src: "/projects/uber-clone.png", alt: "Uber Clone" },
-  { src: "/projects/chess-game.png", alt: "Chess Game" },
-];
+export const marqueeImages = projects.map((project) => {
+  const preview = getProjectPreview(project);
+  return { src: preview.image, alt: project.title, url: preview.url };
+});

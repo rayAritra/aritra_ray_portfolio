@@ -8,6 +8,7 @@ import {
   experience,
   featuredProjects,
   blogPosts,
+  getProjectPreview,
 } from "@/lib/data";
 
 export default function Home() {
@@ -20,14 +21,14 @@ export default function Home() {
           <section className="flex flex-col gap-5">
             <div className="flex items-start justify-between gap-5">
               <div className="flex flex-col gap-3 flex-1">
-                <h1 className="text-xl font-semibold tracking-tight text-[var(--fg)]">
+                <h1 className="text-2xl font-semibold tracking-tight text-[var(--fg)]">
                   {personal.name}
                 </h1>
-                <p className="text-sm text-[var(--muted)] leading-relaxed max-w-sm">
+                <p className="text-base text-[var(--muted)] leading-relaxed max-w-sm">
                   {personal.bio}
                 </p>
               </div>
-              <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border border-[var(--border)] bg-[var(--subtle)] mt-1">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden flex-shrink-0 border border-[var(--border)] bg-[var(--subtle)] mt-1">
                 <Image
                   src={personal.profilePhoto}
                   alt={personal.displayName}
@@ -194,9 +195,14 @@ export default function Home() {
                   {i > 0 && <hr />}
                   <div className="py-3">
                     <p className="text-sm text-[var(--fg)]">
-                      <span className="font-medium">
+                      <a
+                        href={getProjectPreview(project).url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium underline underline-offset-3 hover:opacity-70 transition-opacity"
+                      >
                         {project.title.toLowerCase()}
-                      </span>
+                      </a>
                       <span className="text-[var(--border)] mx-2">—</span>
                       <span className="text-[var(--muted)]">
                         {project.shortDesc}

@@ -20,10 +20,10 @@ export default function BlogPage() {
             >
               ← back
             </Link>
-            <h1 className="text-xl font-semibold tracking-tight text-[var(--fg)]">
+            <h1 className="text-2xl font-semibold tracking-tight text-[var(--fg)]">
               writing.
             </h1>
-            <p className="text-sm text-[var(--muted)] mt-2">
+            <p className="text-base text-[var(--muted)] mt-2">
               notes on code, learning, and building things.
             </p>
           </div>

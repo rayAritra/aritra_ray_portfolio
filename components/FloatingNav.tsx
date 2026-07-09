@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, User, BookOpen, Sun, Moon } from "lucide-react";
+import { Home, User, Briefcase, BookOpen, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 function GithubIcon() {
@@ -84,6 +84,7 @@ export default function FloatingNav() {
   const navItems: NavItem[] = [
     { icon: <Home size={15} />, label: "home", href: "/" },
     { icon: <User size={15} />, label: "about", href: "/#about" },
+    { icon: <Briefcase size={15} />, label: "work", href: "/work" },
     { icon: <BookOpen size={15} />, label: "blog", href: "/blog" },
   ];
 
