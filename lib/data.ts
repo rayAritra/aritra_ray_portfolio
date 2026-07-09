@@ -31,7 +31,7 @@ export const personal = {
     linkedin: "https://www.linkedin.com/in/aritra-ray-236681293",
     twitter: "https://x.com/AritraSohan",
     hashnode: "https://aritra05.hashnode.dev",
-    resume: "#",
+    resume: "/resume.pdf",
   },
   about:
     "I started building things in my first year of college, driven by curiosity and a lot of debugging. Since then, I've worn a few hats: building scalable backend services and APIs at Faunly, shipping core features as a founding engineer at Ezzstar (a Web3 social platform), and building AirEdify, a production EdTech platform. I enjoy working across the full stack, but my focus is on backend systems, database architecture, and API design. I care about clean, reliable backend systems and shipping fast without cutting corners. Currently open to new opportunities  always happy to talk about what I'm building.",

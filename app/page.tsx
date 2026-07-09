@@ -281,7 +281,7 @@ export default function Home() {
                   { label: "github", href: personal.social.github, external: true },
                   { label: "linkedin", href: personal.social.linkedin, external: true },
                   { label: "x / twitter", href: personal.social.twitter, external: true },
-                  { label: "resume", href: personal.social.resume, external: false },
+                  { label: "resume", href: personal.social.resume, external: false, download: true },
                   { label: "hashnode", href: personal.social.hashnode, external: true },
                 ].map((link) => (
                   <a
@@ -289,6 +289,7 @@ export default function Home() {
                     href={link.href}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
+                    download={link.download ? "Aritra Ray - Resume.pdf" : undefined}
                     className="text-sm text-[var(--muted)] hover:text-[var(--fg)] transition-colors w-fit"
                   >
                     {link.label}
