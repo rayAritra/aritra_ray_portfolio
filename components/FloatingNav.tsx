@@ -98,7 +98,7 @@ export default function FloatingNav() {
     {
       icon: <LinkedinIcon />,
       label: "linkedin",
-      href: "https://linkedin.com/in/aritraray",
+      href: "https://www.linkedin.com/in/aritra-ray-236681293/",
       external: true,
     },
     {

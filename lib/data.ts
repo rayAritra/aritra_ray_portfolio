@@ -28,7 +28,7 @@ export const personal = {
   ],
   social: {
     github: "https://github.com/rayAritra",
-    linkedin: "https://www.linkedin.com/in/aritra-ray-236681293",
+    linkedin: "https://www.linkedin.com/in/aritra-ray-236681293/",
     twitter: "https://x.com/AritraSohan",
     hashnode: "https://aritra05.hashnode.dev",
     resume: "/resume.pdf",
